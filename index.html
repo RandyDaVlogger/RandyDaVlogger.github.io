@@ -163,22 +163,19 @@
         .hamburger.open span:nth-child(3) { transform: rotate(-45deg); }
         
         
-        /* --- 5. NEW: WTT-inspired Unified Hero Section --- */
+        /* --- 5. WTT-inspired Unified Hero Section --- */
         .hero {
             position: relative;
-            min-height: 70vh; /* Adjust height as needed */
+            min-height: 70vh;
             display: flex;
-            align-items: center; /* Vertically center content */
-            padding: 4rem 0; /* Add padding for overall spacing */
-            
-            /* Dynamic tech background */
+            align-items: center;
+            padding: 4rem 0;
             background-image: url('https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg'); 
             background-size: cover;
             background-position: center;
             overflow: hidden;
         }
 
-        /* Dark overlay for text readability */
         .hero::before {
             content: '';
             position: absolute;
@@ -186,29 +183,29 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(18, 18, 26, 0.7); /* Adjust opacity as needed */
+            background-color: rgba(18, 18, 26, 0.7);
             z-index: 1;
         }
 
         .hero-content-wrapper {
             position: relative;
-            z-index: 2; /* Ensure content is above overlay */
+            z-index: 2;
             width: 90%;
             max-width: 1200px;
             margin: 0 auto;
-            display: flex; /* Use flexbox for image and text alignment */
-            align-items: center; /* Align items vertically */
-            gap: 3rem; /* Space between image and text */
+            display: flex;
+            align-items: center;
+            gap: 3rem;
         }
 
         .hero-sticker-photo {
-            width: 250px; /* Size of your "sticker" photo */
+            width: 250px;
             height: 250px;
-            border-radius: 8px; /* Slightly rounded corners */
+            border-radius: 8px;
             overflow: hidden;
-            flex-shrink: 0; /* Prevent image from shrinking */
-            box-shadow: 0 8px 20px rgba(0,0,0,0.5); /* Add shadow for pop-out effect */
-            border: 3px solid #e0007a; /* Accent border */
+            flex-shrink: 0;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            border: 3px solid #e0007a;
         }
 
         .hero-sticker-photo img {
@@ -216,17 +213,17 @@
             height: 100%;
             object-fit: cover;
             object-position: center;
-            display: block; /* Remove extra space below image */
+            display: block;
         }
 
         .hero-main-text {
-            flex-grow: 1; /* Allow text to take remaining space */
+            flex-grow: 1;
             color: #fff;
         }
 
         .hero-main-text h1 {
             font-size: 3.5rem;
-            margin-bottom: 0.5rem; /* Reduced margin */
+            margin-bottom: 0.5rem;
         }
 
         .hero-main-text p {
@@ -416,18 +413,18 @@
         
         /* --- 12. Responsive (Mobile) --- */
         @media (max-width: 768px) {
-            /* NEW: Hero adjustments for mobile */
+            /* Hero adjustments for mobile */
             .hero {
-                padding: 2rem 0; /* Less padding on mobile */
+                padding: 2rem 0;
                 min-height: 60vh;
             }
             .hero-content-wrapper {
-                flex-direction: column; /* Stack image and text */
+                flex-direction: column;
                 text-align: center;
                 gap: 1.5rem;
             }
             .hero-sticker-photo {
-                width: 180px; /* Smaller photo on mobile */
+                width: 180px;
                 height: 180px;
             }
             .hero-main-text h1 {
@@ -437,7 +434,7 @@
                 font-size: 1rem;
             }
             .hero-main-text .cta-button {
-                display: block; /* Full width button */
+                display: block;
                 width: fit-content;
                 margin: 0 auto;
             }
@@ -483,11 +480,13 @@
 </head>
 <body>
 
-    <!-- --- 1. Navigation Bar --- --><header class="navbar">
+    <!-- --- 1. Navigation Bar --- -->
+    <header class="navbar">
         <nav class="nav-container" role="navigation" aria-label="Main Navigation">
             <a href="#" class="nav-logo">Randy Ira Jose M. Llamas</a>
             
-            <!-- Desktop Menu --><ul class="nav-menu" id="nav-menu">
+            <!-- Desktop Menu -->
+            <ul class="nav-menu" id="nav-menu">
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li class="dropdown-item">
                     <a href="#portfolio" class="dropdown-toggle nav-link" aria-haspopup="true" aria-expanded="false">Portfolio ▼</a>
@@ -500,7 +499,8 @@
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
             
-            <!-- Hamburger Button --><button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+            <!-- Hamburger Button -->
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -509,13 +509,17 @@
         </nav>
     </header>
 
-    <!-- --- 2. NEW: WTT-inspired Hero Section --- --><section class="hero" role="region" aria-labelledby="hero-heading">
+    <!-- --- 2. Hero Section --- -->
+    <section class="hero" role="region" aria-labelledby="hero-heading">
         <div class="hero-content-wrapper">
-            <!-- Sticker Photo (Left) --><div class="hero-sticker-photo">
-                <img src="my-professional-photo.jpg" alt="A professional photo of Randy Ira Jose M. Llamas">
+            
+            <!-- Hero "Sticker" Photo -->
+            <div class="hero-sticker-photo">
+                <img src="professionalImageRandy.jpg" alt="A professional photo of Randy Ira Jose M. Llamas">
             </div>
             
-            <!-- Title & Description (Right) --><div class="hero-main-text">
+            <!-- Hero Text -->
+            <div class="hero-main-text">
                 <h1 id="hero-heading">Welcome to My Portfolio</h1>
                 <p>Passionate about creating intuitive and beautiful user experiences.
                 <br>Specializing in Human-Computer Interaction, Front-End Development, Artificial Intelligence, Ethical Hacking, and Mobile Engineering.</p>
@@ -524,24 +528,28 @@
         </div>
     </section>
 
-    <!-- --- 3. Content Sections --- --><main>
-        <!-- === ABOUT SECTION === --><section id="about" class="content-section animate-on-scroll" role="region" aria-labelledby="about-heading">
+    <!-- --- 3. Content Sections --- -->
+    <main>
+        <!-- === ABOUT SECTION === -->
+        <section id="about" class="content-section animate-on-scroll" role="region" aria-labelledby="about-heading">
             <div class="container">
                 <h2 id="about-heading">About Me</h2>
-                <p>Hello! I'm Randy Ira Jose M. Llamas, a passion-filled student of Human-Computer Interaction at Systems Plus Computer College. My passion lies in human psychology and modern cutting-edge technology. I believe in the continuous benefits of technology in our lives and strive for correction of mistakes each opportunity I get.</p>
+                <p>Hello! I'm Randy Ira Jose M. Llamas, a passion-filled student of Human-Computer Interaction at Systems Plus Computer College. My passion lies in human psychology and modern cutting-edge technology. I believe in the continuous benefits of technology in our lives. I strive for continous growth and helping others grow.</p>
             </div>
         </section>
 
         <hr class="section-divider">
 
-        <!-- === PORTFOLIO (MY WORK) SECTION === --><section id="portfolio" class="content-section animate-on-scroll" role="region" aria-labelledby="portfolio-heading">
+        <!-- === PORTFOLIO (MY WORK) SECTION === -->
+        <section id="portfolio" class="content-section animate-on-scroll" role="region" aria-labelledby="portfolio-heading">
             <div class="container">
                 <h2 id="portfolio-heading">My Work</h2>
                 
                 <h3 id="work-hci" class="work-subheading">HCI & Management Systems</h3>
                 <div class="project-grid">
-                    <!-- Project 1 --><div class="project-card">
-                        <img src="https://placehold.co/600x400/1a1a2e/e0007a?text=Money+Mgt+System" alt="Money Management System project">
+                    <!-- Project 1 - NEW IMAGE -->
+                    <div class="project-card">
+                        <img src="https://images.pexels.com/photos/210574/pexels-photo-210574.jpeg" alt="Money Management System project">
                         <div class="card-content">
                             <h4>Money Management System</h4>
                             <p>A system designed to help users track their finances with a focus on intuitive data entry and visualization.</p>
@@ -552,8 +560,9 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Project 2 --><div class="project-card">
-                        <img src="https://placehold.co/600x400/1a1a2e/e0007a?text=Parking+Mgt+System" alt="Parking Management System project">
+                    <!-- Project 2 - NEW IMAGE -->
+                    <div class="project-card">
+                        <img src="https://images.pexels.com/photos/9636870/pexels-photo-9636870.jpeg" alt="Parking Management System project">
                         <div class="card-content">
                             <h4>Parking Management System</h4>
                             <p>A smart parking solution to manage available spots, reservations, and payments for a large facility.</p>
@@ -567,8 +576,9 @@
 
                 <h3 id="work-games" class="work-subheading">Web & Games</h3>
                 <div class="project-grid">
-                    <!-- Project 3 --><div class="project-card">
-                        <img src="https://placehold.co/600x400/1a1a2e/e0007a?text=Bomb+Defusal+Game" alt="Bomb Defusal Game project">
+                    <!-- Project 3 - NEW IMAGE -->
+                    <div class="project-card">
+                        <img src="https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg" alt="Bomb Defusal Game project">
                         <div class="card-content">
                             <h4>Bomb Defusal Game</h4>
                             <p>An interactive web-based game requiring logic and quick thinking, built with JavaScript and HTML5 Canvas.</p>
@@ -585,7 +595,8 @@
         
         <hr class="section-divider">
 
-        <!-- === CONTACT (GET IN TOUCH) SECTION === --><section id="contact" class="content-section animate-on-scroll" role="region" aria-labelledby="contact-heading">
+        <!-- === CONTACT (GET IN TOUCH) SECTION === -->
+        <section id="contact" class="content-section animate-on-scroll" role="region" aria-labelledby="contact-heading">
             <div class="container">
                 <h2 id="contact-heading">Get In Touch</h2>
                 <p>I'm currently available for internships and freelance opportunities. The best way to reach me is by email or phone.</p>
@@ -604,9 +615,11 @@
         </section>
     </main>
 
-    <!-- === Footer === --><footer role="contentinfo">
+    <!-- === Footer === -->
+    <footer role="contentinfo">
         <div class="social-links">
-            <a href="https[://]github.com" target="_blank" aria-label="Randy's GitHub Profile">
+            <!-- SVG Icons for GitHub and LinkedIn -->
+            <a href="https://github.com" target="_blank" aria-label="Randy's GitHub Profile">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
             </a>
             <a href="https://linkedin.com" target="_blank" aria-label="Randy's LinkedIn Profile">
@@ -616,7 +629,8 @@
         <p>&copy; 2024 Randy Ira Jose M. Llamas. All rights reserved.</p>
     </footer>
     
-    <!-- === Back to Top Button === --><a href="#" id="back-to-top" aria-label="Back to top">↑</a>
+    <!-- === Back to Top Button === -->
+    <a href="#" id="back-to-top" aria-label="Back to top">↑</a>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -714,12 +728,14 @@
                 // Active Nav State
                 let currentSectionId = '';
                 sections.forEach(section => {
+                    // Add 70px offset for sticky nav
                     const sectionTop = section.offsetTop - 70;
                     if (scrollY >= sectionTop) {
                         currentSectionId = section.id;
                     }
                 });
                 
+                // Handle portfolio sub-sections
                 if (currentSectionId === 'work-hci' || currentSectionId === 'work-games') {
                     currentSectionId = 'portfolio';
                 }
