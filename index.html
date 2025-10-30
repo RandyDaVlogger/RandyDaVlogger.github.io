@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Randy - Online Portfolio</title>
+    <title>Randy Ira Jose M. Llamas - Online Portfolio</title>
     
     <style>
         /* --- 1. Global Reset & Theme --- */
@@ -14,10 +14,9 @@
         }
 
         body {
-            /* Using a clean, modern sans-serif font stack */
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #12121a; /* Very dark blue/black background */
-            color: #f0f0f0; /* Off-white text for readability */
+            background-color: #12121a;
+            color: #f0f0f0;
             line-height: 1.6;
         }
 
@@ -28,9 +27,7 @@
         }
 
         h1, h2, h3 {
-            /* Bold, impactful headings */
             font-weight: 700;
-            /* The WTT-inspired vibrant accent color */
             color: #e0007a; 
         }
 
@@ -45,7 +42,7 @@
 
         /* --- 2. Navigation Bar --- */
         .navbar {
-            background-color: #1a1a2e; /* Slightly lighter than body for contrast */
+            background-color: #1a1a2e;
             padding: 1rem 0;
             border-bottom: 2px solid #333;
             position: sticky;
@@ -74,7 +71,7 @@
         }
 
         .nav-menu li {
-            position: relative; /* Required for the dropdown */
+            position: relative;
         }
 
         .nav-menu li a {
@@ -92,7 +89,7 @@
         
         /* --- 3. Dropdown Menu --- */
         .dropdown {
-            display: none; /* Hidden by default */
+            display: none;
             position: absolute;
             top: 100%;
             left: 0;
@@ -109,46 +106,54 @@
             padding: 0.8rem 1rem;
         }
         
-        /* This class will be toggled by JavaScript */
         .dropdown.show {
             display: block;
         }
         
-        /* --- 4. Hero Image Section --- */
+        /* --- 4. NEW: Split-Screen Hero Section --- */
         .hero {
-            position: relative;
-            height: 70vh;
-            background-image: url('my-professional-photo.jpg'); /* Relative path */
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 2 equal columns */
+            min-height: 80vh; /* Taller */
+            background-color: #12121a;
             overflow: hidden;
         }
-
+        
+        /* Left Side (Text & Dynamic BG) */
+        .hero-text {
+            position: relative; /* For the overlay */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 4rem;
+            
+            /* === DYNAMIC TECH IMAGE URL GOES HERE === */
+            background-image: url('https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg');
+            background-size: cover;
+            background-position: center;
+            z-index: 1; /* Sits below the overlay */
+        }
+        
         /* Dark overlay for text readability */
-        .hero::before {
+        .hero-text::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(18, 18, 26, 0.7); 
+            background-color: rgba(18, 18, 26, 0.8); /* Darker overlay */
+            z-index: 2; /* Sits on top of the BG, behind text */
         }
-
+        
         .hero-content {
-            position: relative; /* Sits on top of the overlay */
-            z-index: 2;
+            position: relative;
+            z-index: 3; /* Sits on top of the overlay */
             color: #fff;
-            max-width: 800px;
-            padding: 2rem;
         }
 
         .hero-content h1 {
-            color: #fff; /* White for the main hero heading */
+            color: #fff;
             font-size: 3.5rem;
         }
         
@@ -163,15 +168,56 @@
             padding: 0.8rem 1.5rem;
             font-size: 1rem;
             font-weight: 600;
-            border: none;
+            border: 2px solid #e0007a;
             border-radius: 5px;
             cursor: pointer;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            text-decoration: none; /* Ensure links look like buttons */
+            display: inline-block; /* Proper button layout */
         }
         
         .cta-button:hover {
-            transform: scale(1.05);
+            background-color: transparent;
+            color: #e0007a;
         }
+        
+        /* Right Side (Your Professional Photo) */
+        .hero-image-container {
+            width: 100%;
+            height: 100%;
+            min-height: 80vh;
+        }
+        
+        .hero-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Crucial: scales image nicely */
+            object-position: center; /* Or 'top center' if head is cut off */
+        }
+        
+        /* --- Responsive: For Mobile --- */
+        @media (max-width: 768px) {
+            .hero {
+                /* Stack columns on top of each other */
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-text {
+                padding: 3rem 2rem;
+                min-height: 50vh;
+            }
+            
+            .hero-image-container {
+                /* On mobile, you might want to hide your photo */
+                /* or give it a specific height */
+                min-height: 50vh; 
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+        }
+
 
         /* --- 5. Content Sections --- */
         .content-section {
@@ -179,19 +225,58 @@
         }
         
         #about {
-            background-color: #1a1a2e; /* Alternating background color */
+            background-color: #1a1a2e; /* Light dark */
+        }
+
+        #contact {
+            background-color: #1a1a2e; /* Light dark */
+        }
+        
+        .section-divider {
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(224, 0, 122, 0), rgba(224, 0, 122, 0.75), rgba(224, 0, 122, 0));
+            margin: 0 auto;
+            width: 70%;
+        }
+
+        /* --- 6. Contact Details Styling --- */
+        .contact-details {
+            margin-top: 2rem;
+        }
+
+        .contact-details p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .contact-details strong {
+            color: #ccc;
+            margin-right: 0.5rem;
+            display: inline-block;
+            min-width: 70px;
+        }
+
+        .contact-details a {
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .contact-details a:hover {
+            color: #fff;
         }
 
     </style>
 </head>
 <body>
 
+    <!-- --- 1. Navigation Bar --- -->
     <header class="navbar">
         <nav class="nav-container">
             <a href="#" class="nav-logo">Randy Ira Jose M. Llamas</a>
             <ul class="nav-menu">
                 <li><a href="#about">About</a></li>
-                
                 <li class="dropdown-item">
                     <a href="#" class="dropdown-toggle">Portfolio ▼</a>
                     <ul class="dropdown">
@@ -200,52 +285,70 @@
                         <li><a href="#hci">HCI Projects</a></li>
                     </ul>
                 </li>
-                
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
 
+    <!-- --- 2. UPDATED Hero Section --- -->
     <section class="hero">
-        <div class="hero-content">
-            <h1>Welcome to My Portfolio</h1>
-            <p>Passionate about technology specifically app creation, Artificial Intelligence, and Cybersecurity.
-            <br>Specializing in App Development and Cybersecurity.</p>
-            <a href="#portfolio" class="cta-button">See My Work</a>
+        <!-- Left Column -->
+        <div class="hero-text">
+            <div class="hero-content">
+                <h1>Welcome to My Portfolio</h1>
+                <p>Passionate about creating intuitive and beautiful user experiences.
+                <br>Specializing in Human-Computer Interaction, Front-End Development, Artificial Intelligence, Ethical Hacking, and Mobile Engineering.</p>
+                <a href="#portfolio" class="cta-button">See My Work</a>
+            </div>
+        </div>
+        
+        <!-- Right Column -->
+        <div class="hero-image-container">
+            <!-- === YOUR PROFESSIONAL PHOTO URL GOES HERE === -->
+            <img src="my-professional-photo.jpg" alt="A professional photo of Randy Ira Jose M. Llamas">
         </div>
     </section>
 
+    <!-- --- 3. Content Sections --- -->
     <main>
+        <!-- === ABOUT SECTION === -->
         <section id="about" class="content-section">
             <div class="container">
                 <h2>About Me</h2>
-                <p>Hello! I'm a student studying Human-Computer Interaction. My passion lies at the intersection of human psychology and cutting-edge technology. I believe that good design is not just about aesthetics, but about creating seamless, accessible, and enjoyable interactions between people and the digital world.</p>
-                <p>This portfolio showcases some of the projects I've worked on, demonstrating my skills in user research, wireframing, prototyping, and front-end development (HTML, CSS, and JavaScript).</p>
+                <!-- === FILLED IN === -->
+                <p>Hello! I'm Randy Ira Jose M. Llamas, a passion-filled student of Human-Computer Interaction at Systems Plus Computer College. My passion lies in human psychology and modern cutting-edge technology. I believe in the continuous benefits of technology in our lives and strive for correction of mistakes each opportunity I get.</p>
             </div>
         </section>
 
+        <hr class="section-divider">
+
+        <!-- === PORTFOLIO (MY WORK) SECTION === -->
         <section id="portfolio" class="content-section">
             <div class="container">
                 <h2>My Work</h2>
-                <p>Here are a few examples of my projects. (You would add project cards or images here).</p>
-                </div>
+                <!-- === FILLED IN === -->
+                <p>Here are a few examples of my projects: Money Management System, Parking Management System, and Bomb Defusal Game.</p>
+            </div>
         </section>
-       <hr class="section-divider">
+        
+        <hr class="section-divider">
 
+        <!-- === CONTACT (GET IN TOUCH) SECTION === -->
         <section id="contact" class="content-section">
             <div class="container">
                 <h2>Get In Touch</h2>
                 <p>I'm currently available for internships and freelance opportunities. The best way to reach me is by email or phone.</p>
                 
-                <!-- This replaces the old form -->
                 <div class="contact-details">
                     <p>
                         <strong>Email:</strong> 
-                        <a href="mailto:your.email@example.com">your.email@example.com</a>
+                        <!-- === FILLED IN === -->
+                        <a href="mailto:llamasrij.032231001@systemsplus.edu.ph">llamasrij.032231001@systemsplus.edu.ph</a>
                     </p>
                     <p>
                         <strong>Phone:</strong> 
-                        <a href="tel:+1234567890">+1 (234) 567-890</a>
+                        <!-- === FILLED IN === -->
+                        <a href="tel:+639204591525">+63 920 459 1525</a>
                     </p>
                 </div>
             </div>
@@ -254,12 +357,12 @@
 
     <script>
         // --- Dropdown Menu JS ---
-        // This is the only JavaScript you need now.
         document.addEventListener('DOMContentLoaded', function() {
             var dropdownToggle = document.querySelector('.dropdown-toggle');
+            // --- FIX: Added 'document' before .querySelector ---
             var dropdownMenu = document.querySelector('.dropdown');
 
-            if (dropdownToggle) { // Check if the element exists first
+            if (dropdownToggle) {
                 dropdownToggle.addEventListener('click', function(event) {
                     event.preventDefault(); 
                     dropdownMenu.classList.toggle('show');
@@ -267,7 +370,6 @@
             }
 
             window.addEventListener('click', function(event) {
-                // Check if the click was *outside* the dropdown item
                 if (dropdownMenu && !event.target.closest('.dropdown-item')) {
                     if (dropdownMenu.classList.contains('show')) {
                         dropdownMenu.classList.remove('show');
