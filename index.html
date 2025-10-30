@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Randy - Online Portfolio</title>
+    
+    <style>
+        /* --- 1. Global Reset & Theme --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            /* Using a clean, modern sans-serif font stack */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #12121a; /* Very dark blue/black background */
+            color: #f0f0f0; /* Off-white text for readability */
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1, h2, h3 {
+            /* Bold, impactful headings */
+            font-weight: 700;
+            /* The WTT-inspired vibrant accent color */
+            color: #e0007a; 
+        }
+
+        h1 { font-size: 3rem; margin-bottom: 1rem; }
+        h2 { font-size: 2.2rem; margin-bottom: 1.5rem; }
+        p { margin-bottom: 1rem; }
+        
+        a {
+            color: #e0007a;
+            text-decoration: none;
+        }
+
+        /* --- 2. Navigation Bar --- */
+        .navbar {
+            background-color: #1a1a2e; /* Slightly lighter than body for contrast */
+            padding: 1rem 0;
+            border-bottom: 2px solid #333;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-menu li {
+            position: relative; /* Required for the dropdown */
+        }
+
+        .nav-menu li a {
+            color: #fff;
+            padding: 1rem;
+            display: block;
+            font-weight: 600;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .nav-menu li a:hover {
+            background-color: #e0007a;
+            color: #fff;
+        }
+        
+        /* --- 3. Dropdown Menu --- */
+        .dropdown {
+            display: none; /* Hidden by default */
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #2a2a3a;
+            min-width: 200px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .dropdown li {
+            width: 100%;
+        }
+
+        .dropdown li a {
+            padding: 0.8rem 1rem;
+        }
+        
+        /* This class will be toggled by JavaScript */
+        .dropdown.show {
+            display: block;
+        }
+        
+        /* --- 4. Hero Image Section --- */
+        .hero {
+            position: relative;
+            height: 70vh;
+            background-image: url('my-professional-photo.jpg'); /* Relative path */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        /* Dark overlay for text readability */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(18, 18, 26, 0.7); 
+        }
+
+        .hero-content {
+            position: relative; /* Sits on top of the overlay */
+            z-index: 2;
+            color: #fff;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .hero-content h1 {
+            color: #fff; /* White for the main hero heading */
+            font-size: 3.5rem;
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .cta-button {
+            background-color: #e0007a;
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* --- 5. Content Sections --- */
+        .content-section {
+            padding: 4rem 0;
+        }
+        
+        #about {
+            background-color: #1a1a2e; /* Alternating background color */
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <nav class="nav-container">
+            <a href="#" class="nav-logo">Randy Ira Jose M. Llamas</a>
+            <ul class="nav-menu">
+                <li><a href="#about">About</a></li>
+                
+                <li class="dropdown-item">
+                    <a href="#" class="dropdown-toggle">Portfolio ▼</a>
+                    <ul class="dropdown">
+                        <li><a href="#web">Web Design</a></li>
+                        <li><a href="#gfx">Graphic Design</a></li>
+                        <li><a href="#hci">HCI Projects</a></li>
+                    </ul>
+                </li>
+                
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to My Portfolio</h1>
+            <p>Passionate about technology specifically app creation, Artificial Intelligence, and Cybersecurity.
+            <br>Specializing in App Development and Cybersecurity.</p>
+            <a href="#portfolio" class="cta-button">See My Work</a>
+        </div>
+    </section>
+
+    <main>
+        <section id="about" class="content-section">
+            <div class="container">
+                <h2>About Me</h2>
+                <p>Hello! I'm a student studying Human-Computer Interaction. My passion lies at the intersection of human psychology and cutting-edge technology. I believe that good design is not just about aesthetics, but about creating seamless, accessible, and enjoyable interactions between people and the digital world.</p>
+                <p>This portfolio showcases some of the projects I've worked on, demonstrating my skills in user research, wireframing, prototyping, and front-end development (HTML, CSS, and JavaScript).</p>
+            </div>
+        </section>
+
+        <section id="portfolio" class="content-section">
+            <div class="container">
+                <h2>My Work</h2>
+                <p>Here are a few examples of my projects. (You would add project cards or images here).</p>
+                </div>
+        </section>
+       <hr class="section-divider">
+
+        <section id="contact" class="content-section">
+            <div class="container">
+                <h2>Get In Touch</h2>
+                <p>I'm currently available for internships and freelance opportunities. The best way to reach me is by email or phone.</p>
+                
+                <!-- This replaces the old form -->
+                <div class="contact-details">
+                    <p>
+                        <strong>Email:</strong> 
+                        <a href="mailto:your.email@example.com">your.email@example.com</a>
+                    </p>
+                    <p>
+                        <strong>Phone:</strong> 
+                        <a href="tel:+1234567890">+1 (234) 567-890</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // --- Dropdown Menu JS ---
+        // This is the only JavaScript you need now.
+        document.addEventListener('DOMContentLoaded', function() {
+            var dropdownToggle = document.querySelector('.dropdown-toggle');
+            var dropdownMenu = document.querySelector('.dropdown');
+
+            if (dropdownToggle) { // Check if the element exists first
+                dropdownToggle.addEventListener('click', function(event) {
+                    event.preventDefault(); 
+                    dropdownMenu.classList.toggle('show');
+                });
+            }
+
+            window.addEventListener('click', function(event) {
+                // Check if the click was *outside* the dropdown item
+                if (dropdownMenu && !event.target.closest('.dropdown-item')) {
+                    if (dropdownMenu.classList.contains('show')) {
+                        dropdownMenu.classList.remove('show');
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
+
