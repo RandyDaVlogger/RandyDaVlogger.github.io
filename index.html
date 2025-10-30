@@ -6,6 +6,11 @@
     <title>Randy Ira Jose M. Llamas - Online Portfolio</title>
     
     <style>
+        /* --- 0. Smooth Scroll --- */
+        html {
+            scroll-behavior: smooth;
+        }
+
         /* --- 1. Global Reset & Theme --- */
         * {
             margin: 0;
@@ -26,13 +31,15 @@
             margin: 0 auto;
         }
 
-        h1, h2, h3 {
+        h1, h2, h3, h4 {
             font-weight: 700;
-            color: #e0007a; 
         }
 
-        h1 { font-size: 3rem; margin-bottom: 1rem; }
-        h2 { font-size: 2.2rem; margin-bottom: 1.5rem; }
+        h1 { font-size: 3rem; margin-bottom: 1rem; color: #fff; }
+        h2 { font-size: 2.2rem; margin-bottom: 1.5rem; color: #e0007a; }
+        h3 { font-size: 1.8rem; margin-bottom: 1.5rem; color: #fff; }
+        h4 { font-size: 1.25rem; margin-bottom: 0.5rem; color: #f0f0f0; }
+        
         p { margin-bottom: 1rem; }
         
         a {
@@ -47,7 +54,7 @@
             border-bottom: 2px solid #333;
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
         }
 
         .nav-container {
@@ -63,6 +70,7 @@
             font-size: 1.5rem;
             font-weight: 700;
             color: #fff;
+            z-index: 1001;
         }
 
         .nav-menu {
@@ -80,6 +88,7 @@
             display: block;
             font-weight: 600;
             transition: background-color 0.3s ease, color 0.3s ease;
+            border-radius: 4px;
         }
 
         .nav-menu li a:hover {
@@ -87,15 +96,27 @@
             color: #fff;
         }
         
-        /* --- 3. Dropdown Menu --- */
+        /* Active Nav Link State */
+        .nav-menu li a.active {
+            background-color: #e0007a;
+            color: #fff;
+        }
+        
+        /* --- 3. IMPROVED: Dropdown Menu --- */
         .dropdown {
-            display: none;
             position: absolute;
             top: 100%;
             left: 0;
             background-color: #2a2a3a;
             min-width: 200px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            display: block;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+            border-radius: 4px;
+            overflow: hidden;
         }
 
         .dropdown li {
@@ -104,62 +125,114 @@
 
         .dropdown li a {
             padding: 0.8rem 1rem;
+            border-radius: 0;
         }
         
         .dropdown.show {
-            display: block;
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
         }
-        
-        /* --- 4. NEW: Split-Screen Hero Section --- */
-        .hero {
-            display: grid;
-            grid-template-columns: 1fr 1fr; /* 2 equal columns */
-            min-height: 80vh; /* Taller */
-            background-color: #12121a;
-            overflow: hidden;
-        }
-        
-        /* Left Side (Text & Dynamic BG) */
-        .hero-text {
-            position: relative; /* For the overlay */
-            display: flex;
+
+        /* --- 4. Hamburger Menu (Mobile) --- */
+        .hamburger {
+            display: none;
             flex-direction: column;
-            justify-content: center;
-            padding: 4rem;
+            justify-content: space-around;
+            width: 2rem;
+            height: 2rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 2rem;
+            height: 0.25rem;
+            background: #fff;
+            border-radius: 10px;
+            transition: all 0.3s linear;
+            position: relative;
+            transform-origin: 1px;
+        }
+        
+        .hamburger.open span:nth-child(1) { transform: rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; transform: translateX(20px); }
+        .hamburger.open span:nth-child(3) { transform: rotate(-45deg); }
+        
+        
+        /* --- 5. NEW: WTT-inspired Unified Hero Section --- */
+        .hero {
+            position: relative;
+            min-height: 70vh; /* Adjust height as needed */
+            display: flex;
+            align-items: center; /* Vertically center content */
+            padding: 4rem 0; /* Add padding for overall spacing */
             
-            /* === DYNAMIC TECH IMAGE URL GOES HERE === */
-            background-image: url('https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg');
+            /* Dynamic tech background */
+            background-image: url('https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg'); 
             background-size: cover;
             background-position: center;
-            z-index: 1; /* Sits below the overlay */
+            overflow: hidden;
         }
-        
+
         /* Dark overlay for text readability */
-        .hero-text::before {
+        .hero::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(18, 18, 26, 0.8); /* Darker overlay */
-            z-index: 2; /* Sits on top of the BG, behind text */
+            background-color: rgba(18, 18, 26, 0.7); /* Adjust opacity as needed */
+            z-index: 1;
         }
-        
-        .hero-content {
+
+        .hero-content-wrapper {
             position: relative;
-            z-index: 3; /* Sits on top of the overlay */
+            z-index: 2; /* Ensure content is above overlay */
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex; /* Use flexbox for image and text alignment */
+            align-items: center; /* Align items vertically */
+            gap: 3rem; /* Space between image and text */
+        }
+
+        .hero-sticker-photo {
+            width: 250px; /* Size of your "sticker" photo */
+            height: 250px;
+            border-radius: 8px; /* Slightly rounded corners */
+            overflow: hidden;
+            flex-shrink: 0; /* Prevent image from shrinking */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5); /* Add shadow for pop-out effect */
+            border: 3px solid #e0007a; /* Accent border */
+        }
+
+        .hero-sticker-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block; /* Remove extra space below image */
+        }
+
+        .hero-main-text {
+            flex-grow: 1; /* Allow text to take remaining space */
             color: #fff;
         }
 
-        .hero-content h1 {
-            color: #fff;
+        .hero-main-text h1 {
             font-size: 3.5rem;
+            margin-bottom: 0.5rem; /* Reduced margin */
         }
-        
-        .hero-content p {
+
+        .hero-main-text p {
             font-size: 1.2rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
+            color: #ccc;
         }
         
         .cta-button {
@@ -172,8 +245,8 @@
             border-radius: 5px;
             cursor: pointer;
             transition: all 0.3s ease;
-            text-decoration: none; /* Ensure links look like buttons */
-            display: inline-block; /* Proper button layout */
+            text-decoration: none;
+            display: inline-block;
         }
         
         .cta-button:hover {
@@ -181,56 +254,13 @@
             color: #e0007a;
         }
         
-        /* Right Side (Your Professional Photo) */
-        .hero-image-container {
-            width: 100%;
-            height: 100%;
-            min-height: 80vh;
-        }
-        
-        .hero-image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Crucial: scales image nicely */
-            object-position: center; /* Or 'top center' if head is cut off */
-        }
-        
-        /* --- Responsive: For Mobile --- */
-        @media (max-width: 768px) {
-            .hero {
-                /* Stack columns on top of each other */
-                grid-template-columns: 1fr;
-            }
-            
-            .hero-text {
-                padding: 3rem 2rem;
-                min-height: 50vh;
-            }
-            
-            .hero-image-container {
-                /* On mobile, you might want to hide your photo */
-                /* or give it a specific height */
-                min-height: 50vh; 
-            }
-            
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-        }
-
-
-        /* --- 5. Content Sections --- */
+        /* --- 6. Content Sections --- */
         .content-section {
             padding: 4rem 0;
         }
         
-        #about {
-            background-color: #1a1a2e; /* Light dark */
-        }
-
-        #contact {
-            background-color: #1a1a2e; /* Light dark */
-        }
+        #about { background-color: #1a1a2e; }
+        #contact { background-color: #1a1a2e; }
         
         .section-divider {
             border: 0;
@@ -240,114 +270,333 @@
             width: 70%;
         }
 
-        /* --- 6. Contact Details Styling --- */
-        .contact-details {
-            margin-top: 2rem;
+        /* --- 7. "My Work" Project Grid --- */
+        .work-subheading {
+            margin-top: 2.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #333;
+        }
+        .work-subheading:first-of-type {
+            margin-top: 0;
         }
 
-        .contact-details p {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            margin-bottom: 1rem;
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
         }
 
-        .contact-details strong {
-            color: #ccc;
-            margin-right: 0.5rem;
-            display: inline-block;
-            min-width: 70px;
+        .project-card {
+            background: #1a1a2e;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .contact-details a {
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(224, 0, 122, 0.2);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background-color: #333;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .card-tags span {
+            background: #e0007a;
+            color: #fff;
+            font-size: 0.8rem;
             font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+        }
+
+        /* --- 8. Contact Details Styling --- */
+        .contact-details { margin-top: 2rem; }
+        .contact-details p { font-size: 1.2rem; line-height: 1.8; margin-bottom: 1rem; }
+        .contact-details strong { color: #ccc; margin-right: 0.5rem; display: inline-block; min-width: 70px; }
+        .contact-details a { font-weight: 600; transition: color 0.3s ease; }
+        .contact-details a:hover { color: #fff; }
+
+        /* --- 9. Footer --- */
+        footer {
+            text-align: center;
+            padding: 3rem 1rem;
+            background: #1a1a2e;
+            margin-top: 4rem;
+            border-top: 2px solid #333;
+        }
+
+        .social-links {
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links a {
+            margin: 0 0.75rem;
+            color: #e0007a;
             transition: color 0.3s ease;
+            display: inline-block;
         }
         
-        .contact-details a:hover {
+        .social-links a svg {
+            width: 28px;
+            height: 28px;
+            fill: currentColor;
+        }
+
+        .social-links a:hover {
             color: #fff;
         }
 
+        footer p {
+            font-size: 0.9rem;
+            color: #888;
+            margin: 0;
+        }
+
+        /* --- 10. Scroll Animation --- */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* --- 11. Back to Top Button --- */
+        #back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #e0007a;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            line-height: 50px;
+            text-align: center;
+            cursor: pointer;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+        }
+        
+        #back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        #back-to-top:hover {
+            background: #ff008c;
+        }
+        
+        /* --- 12. Responsive (Mobile) --- */
+        @media (max-width: 768px) {
+            /* NEW: Hero adjustments for mobile */
+            .hero {
+                padding: 2rem 0; /* Less padding on mobile */
+                min-height: 60vh;
+            }
+            .hero-content-wrapper {
+                flex-direction: column; /* Stack image and text */
+                text-align: center;
+                gap: 1.5rem;
+            }
+            .hero-sticker-photo {
+                width: 180px; /* Smaller photo on mobile */
+                height: 180px;
+            }
+            .hero-main-text h1 {
+                font-size: 2.5rem;
+            }
+            .hero-main-text p {
+                font-size: 1rem;
+            }
+            .hero-main-text .cta-button {
+                display: block; /* Full width button */
+                width: fit-content;
+                margin: 0 auto;
+            }
+
+
+            /* --- Mobile Menu Styles --- */
+            .hamburger { display: flex; }
+            .nav-menu {
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                background: #1a1a2e;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-100%);
+                transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+            }
+            .nav-menu.open {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+            .nav-menu li a { font-size: 1.5rem; padding: 1.5rem; }
+            .dropdown {
+                position: relative;
+                width: 100%;
+                text-align: center;
+                background: none;
+                box-shadow: none;
+                opacity: 1; visibility: visible; transform: none;
+                display: none;
+            }
+            .dropdown.show { display: block; }
+            .dropdown li a { font-size: 1.2rem; padding: 0.5rem; color: #ccc; }
+            .nav-logo { z-index: 1001; }
+        }
     </style>
 </head>
 <body>
 
-    <!-- --- 1. Navigation Bar --- -->
-    <header class="navbar">
-        <nav class="nav-container">
+    <!-- --- 1. Navigation Bar --- --><header class="navbar">
+        <nav class="nav-container" role="navigation" aria-label="Main Navigation">
             <a href="#" class="nav-logo">Randy Ira Jose M. Llamas</a>
-            <ul class="nav-menu">
-                <li><a href="#about">About</a></li>
+            
+            <!-- Desktop Menu --><ul class="nav-menu" id="nav-menu">
+                <li><a href="#about" class="nav-link">About</a></li>
                 <li class="dropdown-item">
-                    <a href="#" class="dropdown-toggle">Portfolio ▼</a>
-                    <ul class="dropdown">
-                        <li><a href="#web">Web Design</a></li>
-                        <li><a href="#gfx">Graphic Design</a></li>
-                        <li><a href="#hci">HCI Projects</a></li>
+                    <a href="#portfolio" class="dropdown-toggle nav-link" aria-haspopup="true" aria-expanded="false">Portfolio ▼</a>
+                    <ul class="dropdown" role="menu">
+                        <li><a href="#portfolio" role="menuitem">All Projects</a></li>
+                        <li><a href="#work-hci" role="menuitem">HCI Projects</a></li>
+                        <li><a href="#work-games" role="menuitem">Web & Games</a></li>
                     </ul>
                 </li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
+            
+            <!-- Hamburger Button --><button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
         </nav>
     </header>
 
-    <!-- --- 2. UPDATED Hero Section --- -->
-    <section class="hero">
-        <!-- Left Column -->
-        <div class="hero-text">
-            <div class="hero-content">
-                <h1>Welcome to My Portfolio</h1>
+    <!-- --- 2. NEW: WTT-inspired Hero Section --- --><section class="hero" role="region" aria-labelledby="hero-heading">
+        <div class="hero-content-wrapper">
+            <!-- Sticker Photo (Left) --><div class="hero-sticker-photo">
+                <img src="my-professional-photo.jpg" alt="A professional photo of Randy Ira Jose M. Llamas">
+            </div>
+            
+            <!-- Title & Description (Right) --><div class="hero-main-text">
+                <h1 id="hero-heading">Welcome to My Portfolio</h1>
                 <p>Passionate about creating intuitive and beautiful user experiences.
                 <br>Specializing in Human-Computer Interaction, Front-End Development, Artificial Intelligence, Ethical Hacking, and Mobile Engineering.</p>
                 <a href="#portfolio" class="cta-button">See My Work</a>
             </div>
         </div>
-        
-        <!-- Right Column -->
-        <div class="hero-image-container">
-            <!-- === YOUR PROFESSIONAL PHOTO URL GOES HERE === -->
-            <img src="professionalImageRandy.png" alt="A professional photo of Randy Ira Jose M. Llamas">
-        </div>
     </section>
 
-    <!-- --- 3. Content Sections --- -->
-    <main>
-        <!-- === ABOUT SECTION === -->
-        <section id="about" class="content-section">
+    <!-- --- 3. Content Sections --- --><main>
+        <!-- === ABOUT SECTION === --><section id="about" class="content-section animate-on-scroll" role="region" aria-labelledby="about-heading">
             <div class="container">
-                <h2>About Me</h2>
-                <!-- === FILLED IN === -->
-                <p>Hello! I'm Randy Ira Jose M. Llamas, a passion-filled student of Human-Computer Interaction at Systems Plus Computer College. My passion lies in human psychology and modern cutting-edge technology. I believe in the continuous benefits of technology in our lives.I strive for continuous growth and helping others.</p>
+                <h2 id="about-heading">About Me</h2>
+                <p>Hello! I'm Randy Ira Jose M. Llamas, a passion-filled student of Human-Computer Interaction at Systems Plus Computer College. My passion lies in human psychology and modern cutting-edge technology. I believe in the continuous benefits of technology in our lives and strive for correction of mistakes each opportunity I get.</p>
             </div>
         </section>
 
         <hr class="section-divider">
 
-        <!-- === PORTFOLIO (MY WORK) SECTION === -->
-        <section id="portfolio" class="content-section">
+        <!-- === PORTFOLIO (MY WORK) SECTION === --><section id="portfolio" class="content-section animate-on-scroll" role="region" aria-labelledby="portfolio-heading">
             <div class="container">
-                <h2>My Work</h2>
-                <!-- === FILLED IN === -->
-                <p>Here are a few examples of my projects: Money Management System, Parking Management System, and Bomb Defusal Game.</p>
+                <h2 id="portfolio-heading">My Work</h2>
+                
+                <h3 id="work-hci" class="work-subheading">HCI & Management Systems</h3>
+                <div class="project-grid">
+                    <!-- Project 1 --><div class="project-card">
+                        <img src="https://placehold.co/600x400/1a1a2e/e0007a?text=Money+Mgt+System" alt="Money Management System project">
+                        <div class="card-content">
+                            <h4>Money Management System</h4>
+                            <p>A system designed to help users track their finances with a focus on intuitive data entry and visualization.</p>
+                            <div class="card-tags">
+                                <span>HCI</span>
+                                <span>UX/UI</span>
+                                <span>Finance</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Project 2 --><div class="project-card">
+                        <img src="https://placehold.co/600x400/1a1a2e/e0007a?text=Parking+Mgt+System" alt="Parking Management System project">
+                        <div class="card-content">
+                            <h4>Parking Management System</h4>
+                            <p>A smart parking solution to manage available spots, reservations, and payments for a large facility.</p>
+                            <div class="card-tags">
+                                <span>HCI</span>
+                                <span>Systems Design</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 id="work-games" class="work-subheading">Web & Games</h3>
+                <div class="project-grid">
+                    <!-- Project 3 --><div class="project-card">
+                        <img src="https://placehold.co/600x400/1a1a2e/e0007a?text=Bomb+Defusal+Game" alt="Bomb Defusal Game project">
+                        <div class="card-content">
+                            <h4>Bomb Defusal Game</h4>
+                            <p>An interactive web-based game requiring logic and quick thinking, built with JavaScript and HTML5 Canvas.</p>
+                            <div class="card-tags">
+                                <span>JavaScript</span>
+                                <span>Game Dev</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
         
         <hr class="section-divider">
 
-        <!-- === CONTACT (GET IN TOUCH) SECTION === -->
-        <section id="contact" class="content-section">
+        <!-- === CONTACT (GET IN TOUCH) SECTION === --><section id="contact" class="content-section animate-on-scroll" role="region" aria-labelledby="contact-heading">
             <div class="container">
-                <h2>Get In Touch</h2>
+                <h2 id="contact-heading">Get In Touch</h2>
                 <p>I'm currently available for internships and freelance opportunities. The best way to reach me is by email or phone.</p>
                 
                 <div class="contact-details">
                     <p>
                         <strong>Email:</strong> 
-                        <!-- === FILLED IN === -->
                         <a href="mailto:llamasrij.032231001@systemsplus.edu.ph">llamasrij.032231001@systemsplus.edu.ph</a>
                     </p>
                     <p>
                         <strong>Phone:</strong> 
-                        <!-- === FILLED IN === -->
                         <a href="tel:+639204591525">+63 920 459 1525</a>
                     </p>
                 </div>
@@ -355,32 +604,149 @@
         </section>
     </main>
 
-    <script>
-        // --- Dropdown Menu JS ---
-        document.addEventListener('DOMContentLoaded', function() {
-            var dropdownToggle = document.querySelector('.dropdown-toggle');
-            // --- FIX: Added 'document' before .querySelector ---
-            var dropdownMenu = document.querySelector('.dropdown');
+    <!-- === Footer === --><footer role="contentinfo">
+        <div class="social-links">
+            <a href="https[://]github.com" target="_blank" aria-label="Randy's GitHub Profile">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+            <a href="https://linkedin.com" target="_blank" aria-label="Randy's LinkedIn Profile">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+        </div>
+        <p>&copy; 2024 Randy Ira Jose M. Llamas. All rights reserved.</p>
+    </footer>
+    
+    <!-- === Back to Top Button === --><a href="#" id="back-to-top" aria-label="Back to top">↑</a>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // --- Element Selectors ---
+            const dropdownToggle = document.querySelector('.dropdown-toggle');
+            const dropdownMenu = document.querySelector('.dropdown');
+            const dropdownLinks = document.querySelectorAll('.dropdown a');
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('nav-menu');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('.content-section, .hero');
+            const scrollElements = document.querySelectorAll('.animate-on-scroll');
+            const backToTopButton = document.getElementById('back-to-top');
+
+            
+            // --- 1. Dropdown Menu Logic (Desktop & Mobile) ---
             if (dropdownToggle) {
                 dropdownToggle.addEventListener('click', function(event) {
                     event.preventDefault(); 
                     dropdownMenu.classList.toggle('show');
+                    const isExpanded = dropdownMenu.classList.contains('show');
+                    dropdownToggle.setAttribute('aria-expanded', isExpanded);
                 });
             }
+
+            dropdownLinks.forEach(function(link) {
+                link.addEventListener('click', function() {
+                    if (dropdownMenu.classList.contains('show')) {
+                        dropdownMenu.classList.remove('show');
+                        dropdownToggle.setAttribute('aria-expanded', 'false');
+                    }
+                    if (navMenu.classList.contains('open')) {
+                        navMenu.classList.remove('open');
+                        hamburger.classList.remove('open');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            });
 
             window.addEventListener('click', function(event) {
                 if (dropdownMenu && !event.target.closest('.dropdown-item')) {
                     if (dropdownMenu.classList.contains('show')) {
                         dropdownMenu.classList.remove('show');
+                        dropdownToggle.setAttribute('aria-expanded', 'false');
                     }
                 }
             });
+
+            // --- 2. Hamburger Menu Logic ---
+            if (hamburger) {
+                hamburger.addEventListener('click', function() {
+                    navMenu.classList.toggle('open');
+                    hamburger.classList.toggle('open');
+                    const isExpanded = navMenu.classList.contains('open');
+                    hamburger.setAttribute('aria-expanded', isExpanded);
+                });
+                
+                document.querySelectorAll('.nav-menu li a:not(.dropdown-toggle)').forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (navMenu.classList.contains('open')) {
+                            navMenu.classList.remove('open');
+                            hamburger.classList.remove('open');
+                            hamburger.setAttribute('aria-expanded', 'false');
+                        }
+                    });
+                });
+            }
+
+            // --- 3. Scroll Animation Logic (IntersectionObserver) ---
+            const scrollObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        scrollObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            scrollElements.forEach(el => {
+                scrollObserver.observe(el);
+            });
+
+            // --- 4. Active Nav & Back-to-Top Logic (onScroll) ---
+            window.addEventListener('scroll', function() {
+                const scrollY = window.scrollY;
+
+                // Back to Top Button
+                if (scrollY > 300) {
+                    backToTopButton.classList.add('show');
+                } else {
+                    backToTopButton.classList.remove('show');
+                }
+                
+                // Active Nav State
+                let currentSectionId = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 70;
+                    if (scrollY >= sectionTop) {
+                        currentSectionId = section.id;
+                    }
+                });
+                
+                if (currentSectionId === 'work-hci' || currentSectionId === 'work-games') {
+                    currentSectionId = 'portfolio';
+                }
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    const href = link.getAttribute('href');
+                    if (href === '#' + currentSectionId) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+            
+            // --- 5. Back to Top Click ---
+            if (backToTopButton) {
+                backToTopButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+
         });
     </script>
 
 </body>
 </html>
-
-
 
