@@ -267,6 +267,37 @@
             width: 70%;
         }
 
+        /* --- NEW: About Me Skills List --- */
+        .skills-list {
+            list-style: none; /* Remove default bullets */
+            padding-left: 0;
+            margin-top: 2rem; /* Space from paragraph */
+        }
+
+        .skills-list li {
+            position: relative;
+            padding-left: 1.8rem; /* Space for custom bullet */
+            margin-bottom: 0.8rem;
+            font-size: 1.05rem; /* Slightly larger text */
+        }
+
+        /* Custom bullet (accent color) */
+        .skills-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            top: 2px; /* Align with text */
+            color: #e0007a;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .skills-list li strong {
+            color: #f0f0f0; /* White/light label */
+            margin-right: 0.5rem;
+        }
+
+
         /* --- 7. "My Work" Project Grid --- */
         .work-subheading {
             margin-top: 2.5rem;
@@ -515,7 +546,7 @@
             
             <!-- Hero "Sticker" Photo -->
             <div class="hero-sticker-photo">
-                <img src="professionalImageRandy.png" alt="A professional photo of Randy Ira Jose M. Llamas">
+                <img src="my-professional-photo.jpg" alt="A professional photo of Randy Ira Jose M. Llamas">
             </div>
             
             <!-- Hero Text -->
@@ -530,11 +561,21 @@
 
     <!-- --- 3. Content Sections --- -->
     <main>
-        <!-- === ABOUT SECTION === -->
+        <!-- === UPDATED ABOUT SECTION === -->
         <section id="about" class="content-section animate-on-scroll" role="region" aria-labelledby="about-heading">
             <div class="container">
                 <h2 id="about-heading">About Me</h2>
                 <p>Hello! I'm Randy Ira Jose M. Llamas, a passion-filled student of Human-Computer Interaction at Systems Plus Computer College. My passion lies in human psychology and modern cutting-edge technology. I believe in the continuous benefits of technology in our lives. I strive for continous growth and helping others grow.</p>
+                
+                <!-- NEW: Skills & Background List -->
+                <h3 style="margin-top: 2rem;">My Skills & Background</h3>
+                <ul class="skills-list">
+                    <li><strong>Technical Skills:</strong> HTML, CSS, JavaScript, PHP, and SQL.</li>
+                    <li><strong>Digital & Creative:</strong> Social Media Management, Video Editing, Photo Editing, and Photography.</li>
+                    <li><strong>Professional Experience:</strong> Manager at Manang Colasas Restobar.</li>
+                    <li><strong>Education:</strong> Systems Plus Computer College (College) & APEC Schools Manila (High School).</li>
+                    <li><strong>Hobbies & Interests:</strong> Table Tennis, Taekwondo, Speedcubing, and Scrabble.</li>
+                </ul>
             </div>
         </section>
 
@@ -765,6 +806,4 @@
 
 </body>
 </html>
-
-
 
